@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+@keyframes qcm-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes qcm-glow {
+  0%,
+  100% {
+    opacity: 0.55;
+    filter: blur(18px);
+  }
+  50% {
+    opacity: 0.9;
+    filter: blur(22px);
+  }
+}
+
+.qcm-float {
+  animation: qcm-float 7s ease-in-out infinite;
+}
+
+.qcm-glow {
+  animation: qcm-glow 5.5s ease-in-out infinite;
+}
+

@@ -1,0 +1,54 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+  model User {
+    id            String       @id @default(cuid())
+    email         String       @unique
+    password      String
+    rooms         room[]
+    roomPlayers   RoomPlayer[]
+  }
+
+  enum UserStatus {
+    WAITING
+    PLAYING
+    COMPLETED
+  }
+
+  model room {
+    id String @id @default(cuid())
+    hostId String
+    host   User   @relation(fields: [hostId], references: [id])
+    createdAt    DateTime @default(now())
+    players RoomPlayer[]
+    topic    String?
+    quizdata Json
+    quiz_index Int @default(0)
+
+  }
+
+  model RoomPlayer {
+
+    roomId  String
+    userId  String
+    
+    score   Int @default(0)
+    state   UserStatus @default(WAITING)
+
+    room    room @relation(fields: [roomId], references: [id], onDelete: Cascade)
+    user    User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([roomId, userId]) // prevents same user joining twice
+  }

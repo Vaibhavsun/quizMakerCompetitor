@@ -1,0 +1,13 @@
+# Secrets — never commit
+.env
+terraform.tfvars
+*.pem
+
+# State
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# OS junk
+.DS_Store
