@@ -65,9 +65,16 @@ resource "aws_instance" "backend" {
     #!/bin/bash
     set -eux
     curl -fsSL https://rpm.nodesource.com/setup_20.x | bash -
-    dnf install -y nodejs git
+    dnf install -y nodejs git rsync
     npm install -g pm2
   EOF
 
   tags = { Name = "${var.project}-backend" }
+
+  # user_data runs only at first boot; ignoring it here prevents Terraform from
+  # replacing the live instance whenever we tweak the bootstrap script.
+  # ami is also ignored so a newer AL2023 release doesn't force a replacement.
+  lifecycle {
+    ignore_changes = [user_data, ami]
+  }
 }

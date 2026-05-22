@@ -30,15 +30,10 @@ module "db" {
   vpc_id            = module.network.vpc_id
 }
 
-# ── frontend (AWS Amplify Hosting) ─────────────────────────────────────────
-# Stays a no-op until you fill in `github_repo_url` and `github_access_token`
-# in terraform.tfvars. Then `terraform apply` again to provision Amplify.
+# ── frontend (S3 static website, HTTP) ─────────────────────────────────────
 module "frontend" {
-  source              = "./module/frontend"
-  project             = var.project
-  github_repo_url     = var.github_repo_url
-  github_access_token = var.github_access_token
-  backend_host        = module.backend.public_ip
+  source  = "./module/frontend"
+  project = var.project
 }
 
 # ── backend EC2 (public subnet) ────────────────────────────────────────────

@@ -24,14 +24,12 @@ output "ssh_key_path" {
 }
 
 output "frontend_url" {
-  description = "Amplify-hosted frontend URL (null until github vars are set + first build completes)"
-  value       = module.frontend.amplify_url
-  sensitive   = true
+  description = "Public S3 website URL for the deployed frontend (HTTP)"
+  value       = module.frontend.website_url
 }
 
-output "amplify_app_id" {
-  description = "Amplify app ID — find this in the AWS console under Amplify"
-  value       = module.frontend.amplify_app_id
-  sensitive   = true
+output "frontend_bucket" {
+  description = "S3 bucket name to sync the Vite build into"
+  value       = module.frontend.bucket_name
 }
 

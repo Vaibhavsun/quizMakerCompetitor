@@ -1,11 +1,9 @@
-output "amplify_app_id" {
-  description = "Amplify app ID (null until github vars are set)"
-  value       = local.enabled ? aws_amplify_app.site[0].id : null
-  sensitive   = true
+output "bucket_name" {
+  description = "S3 bucket holding the built frontend artifacts"
+  value       = aws_s3_bucket.site.id
 }
 
-output "amplify_url" {
-  description = "Deployed Amplify URL (null until github vars are set and a build has run)"
-  value       = local.enabled ? "https://${var.branch}.${aws_amplify_app.site[0].default_domain}" : null
-  sensitive   = true
+output "website_url" {
+  description = "Public S3 static-website URL (HTTP only)"
+  value       = "http://${aws_s3_bucket_website_configuration.site.website_endpoint}"
 }
