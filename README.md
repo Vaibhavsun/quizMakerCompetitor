@@ -390,12 +390,12 @@ flowchart LR
     main[main.jsx<br/>BrowserRouter + App]
     main --> app[App.jsx<br/>RequireAuth wrapper]
 
-    app --> auth[/auth/<br/>AuthPage.jsx]
-    app --> home[/<br/>HomePage.jsx]
-    app --> create[/rooms/new<br/>CreateRoomPage.jsx]
-    app --> join[/rooms/join<br/>JoinRoomPage.jsx]
-    app --> game[/rooms/:id/play<br/>GamePage.jsx]
-    app --> results[/rooms/:id/results<br/>ResultsPage.jsx]
+    app --> auth["/auth<br/>AuthPage.jsx"]
+    app --> home["/<br/>HomePage.jsx"]
+    app --> create["/rooms/new<br/>CreateRoomPage.jsx"]
+    app --> join["/rooms/join<br/>JoinRoomPage.jsx"]
+    app --> game["/rooms/:id/play<br/>GamePage.jsx"]
+    app --> results["/rooms/:id/results<br/>ResultsPage.jsx"]
 
     auth --> apiLib[lib/api.js]
     home --> apiLib
