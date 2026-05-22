@@ -266,7 +266,7 @@ sequenceDiagram
     participant AI as OpenAI / Bedrock
     participant DB as RDS Postgres
 
-    P1->>FE: open https://&lt;s3-website&gt;/
+    P1->>FE: open the S3 website URL
     FE->>API: POST /user/login
     API->>DB: find user, check password
     DB-->>API: user row
